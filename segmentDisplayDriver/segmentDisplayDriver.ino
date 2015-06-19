@@ -6,7 +6,8 @@ const int ANODE1 = A0;
 const int ANODE2 = A1;
 //bitRead reads right to left
 byte numArr[10] = {63, 6, 91, 79, 102, 109, 125, 7, 127, 103};
-
+String digit;
+int temp;
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -19,6 +20,13 @@ void setup() {
 void loop() {
     digitalWrite(ANODE1, HIGH);
     digitalWrite(ANODE2, HIGH);
+    // listen for raspberry pi com
+    if (Serial.available()) {
+         temp = Serial.parseInt();
+         Serial.println(temp);
+         display(temp);
+  }
+    
     for(byte l=7;l<100;l++) {
         display(l);
         delay(2000);
