@@ -70,17 +70,8 @@ public:
 private:
   // These are called by decode
   int getRClevel(decode_results *results, int *offset, int *used, int t1);
-  long decodeNEC(decode_results *results);
   long decodeSony(decode_results *results);
   long decodeSanyo(decode_results *results);
-  long decodeMitsubishi(decode_results *results);
-  long decodeRC5(decode_results *results);
-  long decodeRC6(decode_results *results);
-  long decodePanasonic(decode_results *results);
-  long decodeLG(decode_results *results);
-  long decodeJVC(decode_results *results);
-  long decodeSAMSUNG(decode_results *results);
-  long decodeWhynter(decode_results *results);
   long decodeHash(decode_results *results);
   int compare(unsigned int oldval, unsigned int newval);
 

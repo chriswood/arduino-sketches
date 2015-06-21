@@ -13,6 +13,7 @@ void setup()
 void loop() {
   if (irrecv.decode(&results)) {
     Serial.println(results.decode_type);
+    Serial.println(results.value);
     irrecv.resume(); // Receive the next value
   }
 }
