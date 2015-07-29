@@ -22,8 +22,9 @@ Adafruit_BMP085::Adafruit_BMP085() {
 
 
 boolean Adafruit_BMP085::begin(uint8_t mode) {
-  if (mode > BMP085_ULTRAHIGHRES) 
+  if (mode > BMP085_ULTRAHIGHRES){ 
     mode = BMP085_ULTRAHIGHRES;
+  }
   oversampling = mode;
 
   Wire.begin();
@@ -59,6 +60,8 @@ boolean Adafruit_BMP085::begin(uint8_t mode) {
   Serial.print("mc = "); Serial.println(mc, DEC);
   Serial.print("md = "); Serial.println(md, DEC);
 #endif
+  //compiler warnings elsewise
+  return true;
 }
 
 uint16_t Adafruit_BMP085::readRawTemperature(void) {
@@ -190,7 +193,7 @@ int32_t Adafruit_BMP085::readPressure(void) {
 }
 
 
-float Adafruit_BMP085::readTemperature(void) {
+float Adafruit_BMP085::readTemperature(char deg_unit) {
   int32_t UT, X1, X2, B5;     // following ds convention
   float temp;
 
@@ -211,7 +214,10 @@ float Adafruit_BMP085::readTemperature(void) {
   B5 = X1 + X2;
   temp = (B5+8)/pow(2,4);
   temp /= 10;
-  
+  //small tweak...
+  if (deg_unit== 'f'){
+    temp = (9.0/5.0) * temp + 32;
+  }
   return temp;
 }
 
